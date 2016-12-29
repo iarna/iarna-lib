@@ -1,0 +1,9 @@
+{
+  "name": "@iarna/lib",
+  "version": "1.0.0",
+  "description": "Declare intra-package library paths and load modules from them.",
+  "main": "index.js",
+  "keywords": [ "mad science", "loader", "intrapackage modules"],
+  "author": "Rebecca Turner <me@re-becca.org> (http://re-becca.org/)",
+  "license": "ISC"
+}
