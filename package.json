@@ -17,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/iarna/iarna-lib/issues"
   },
-  "homepage": "https://github.com/iarna/iarna-lib#readme"
+  "homepage": "https://github.com/iarna/iarna-lib#readme",
+  "files": [
+    "index.js",
+    "caller.js"
+  ]
 }
