@@ -10,8 +10,15 @@ module.exports = process.__iarna_lib__ = function () {
   const paths = [].slice.call(arguments, 0)
   const dirname = path.dirname(module.parent.filename)
   const packagepath = getPackageFolder(dirname)
-  if (!libPaths[packagepath]) libPaths[packagepath] = []
-  libPaths[packagepath].unshift.apply(libPaths[packagepath], paths.map(p => path.resolve(dirname, p)))
+  for (let p of paths) {
+    const targetpath = path.resolve(dirname, p)
+    if (!libPaths[packagepath]) libPaths[packagepath] = []
+    libPaths[packagepath].unshift(targetpath)
+    if (path.relative(packagepath, targetpath)[0] == '.') {
+      if (!libPaths[targetpath]) libPaths[targetpath] = []
+      libPaths[targetpath].unshift(targetpath)
+    }
+  }
 }
 
 function getPackageFolder (current, top) {
