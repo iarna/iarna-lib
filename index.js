@@ -11,7 +11,7 @@ if (process.__iarna_lib__)
 
 module.exports = process.__iarna_lib__ = function () {
   const paths = [].slice.call(arguments, 0)
-  const dirname = path.dirname(module.parent.filename)
+  const dirname = path.dirname(caller())
   const packagepath = getPackageFolder(dirname)
   for (let p of paths) {
     const targetpath = path.resolve(dirname, p)
