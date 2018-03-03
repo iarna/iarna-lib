@@ -15,13 +15,18 @@ module.exports = process.__iarna_lib__ = function () {
   const packagepath = getPackageFolder(dirname)
   for (let p of paths) {
     const targetpath = path.resolve(dirname, p)
-    if (!libPaths[packagepath]) libPaths[packagepath] = []
-    libPaths[packagepath].unshift(targetpath)
-    if (path.relative(packagepath, targetpath)[0] == '.') {
-      if (!libPaths[targetpath]) libPaths[targetpath] = []
-      libPaths[targetpath].unshift(targetpath)
-    }
+    addPath(packagepath, targetpath)
+    const targetPackage = getPackageFolder(targetpath)
+    if (targetPackage !== packagepath) addPath(targetPackage, targetpath)
   }
+}
+
+function addPath(pkg, path) {
+  if (!libPaths[pkg]) {
+    libPaths[pkg] = [path]
+    return
+  }
+  libPaths[pkg] = [path].concat(libPaths[pkg].filter(p => p !== path))
 }
 
 function getPackageFolder (current, top) {
