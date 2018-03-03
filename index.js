@@ -4,7 +4,10 @@ const fs = require('fs')
 const caller = require('./caller.js')
 const libPaths = {}
 
-if (process.__iarna_lib__) return process.__iarna_lib__
+if (process.__iarna_lib__)
+  module.exports = process.__iarna_lib__
+  return
+}
 
 module.exports = process.__iarna_lib__ = function () {
   const paths = [].slice.call(arguments, 0)
