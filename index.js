@@ -47,15 +47,12 @@ function getPackageFolder (current, top) {
 
 global.use = function use (toLoad) {
   const callerDir = path.dirname(caller())
-  for (let dir of Object.keys(libPaths)) {
-    if (/^(?:[^.]|$)/.test(path.relative(dir, callerDir))) {
-      const oldPaths = module.paths
-      module.paths = libPaths[dir]
-      const result = module.require(toLoad)
-      module.paths = oldPaths
-      return result
-    }
-  }
+  const [ dir ] = Object.keys(libPaths).filter(_ => /^(?:[^.]|$)/.test(path.relative(_, callerDir)))
+  if (!dir) throw new Error('Could not find any library paths for the callsite: ' + callerDir)
 
-  throw new Error('Could not find any library paths for the callsite: ' + callerDir)  
+  const oldPaths = module.paths
+  module.paths = libPaths[dir]
+  const result = module.require(toLoad)
+  module.paths = oldPaths
+  return result
 }
