@@ -8,6 +8,9 @@
     "loader",
     "intrapackage modules"
   ],
+  "scripts": {
+    "test": "tap -J test/*.js"
+  },
   "author": "Rebecca Turner <me@re-becca.org> (http://re-becca.org/)",
   "license": "ISC",
   "repository": {
@@ -21,5 +24,9 @@
   "files": [
     "index.js",
     "caller.js"
-  ]
+  ],
+  "devDependencies": {
+    "require-inject": "^1.4.3",
+    "tap": "^12.1.0"
+  }
 }
